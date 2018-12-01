@@ -31,3 +31,4 @@ config/ips.yml
 # dirk
 *~
 node_modules/
+screenshots/

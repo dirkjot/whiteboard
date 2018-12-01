@@ -53,7 +53,7 @@ const serious_boards = ['Labs - Atlanta',
 
 
 
-const parentsAnnouncement = Selector('div.author').withText('Parents Employee')
+const parentsAnnouncement = Selector('div.author').withText('Parents@Pivotal')
 
 function insertMsg(boardname) {
     fixture('Modify: ' + boardname)
@@ -98,8 +98,11 @@ async function enterinfo() {
         .expect(description.exists).ok()
     
         .typeText(title, 'Parents at Pivotal survey')
-        .typeText(author, 'Parents Employee Resource Group')
-        .typeText(description, 'TODO')
+        .typeText(author, 'Parents@Pivotal')
+        .typeText(description, `Calling all Pivot Parents + Caregivers! 
+  Please fill out this brief survey to help the Parents Employee Resource Group understand where to focus its efforts upon launch in early 2019: 
+  <https://goo.gl/forms/rnQWpa4G6DPU7V4U2>
+`)
 
         .expect(submitbutton.exists).ok()
         .click(submitbutton)
