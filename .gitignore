@@ -27,4 +27,7 @@ cf-cli.deb
 coverage
 
 config/ips.yml
+
+# dirk
 *~
+node_modules/

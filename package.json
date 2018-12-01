@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "testcafe": "^0.23.2"
+  }
+}
