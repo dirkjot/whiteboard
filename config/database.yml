@@ -3,14 +3,18 @@ development:
   host: localhost
   database: whiteboard_development
   template: template0
+  password:  <%= ENV['DATABASE_PASSWORD'] %>
+
 
 test:
   adapter: mysql2
   host: localhost
   database: whiteboard_test
   template: template0
+  password: l5alief
 
 production:
   adapter: mysql2
   host: localhost
   database: whiteboard_production
+  password: l5alief
