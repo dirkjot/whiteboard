@@ -48,12 +48,17 @@ const serious_boards = ['Labs - Atlanta',
 'Pivotal Tracker' ]
 
 
+const announcement = {
+    author: 'Parents@Pivotal --- 3',
+    title: 'Parents at Pivotal survey',
+    description: `Calling all Pivot Parents + Caregivers! 
+Please fill out this brief survey to help the Parents Employee Resource Group understand where to focus its efforts upon launch in early 2019: 
+<https://goo.gl/forms/rnQWpa4G6DPU7V4U2>
+`,
+    selector: Selector('bogus')
+}
+announcement.selector = Selector('div.author').withText(announcement.author)
 
-
-
-
-
-const parentsAnnouncement = Selector('div.author').withText('Parents@Pivotal')
 
 function insertMsg(boardname) {
     fixture('Modify: ' + boardname)
@@ -62,7 +67,9 @@ function insertMsg(boardname) {
     test('Navigate', async t => {
 
         const link = Selector('a').withExactText(boardname)
-        const addInteresting =  Selector('i.icon-plus-sign').nth(2)
+        const addInteresting =  Selector('i.icon-plus-sign').nth(1)
+
+        //.nth(2)
               //Selector('h2').withText("Interestings")
               //.nextSibling('a').nth(0).find('i.icon-plus-sign')
         const standupName = Selector('div.navbar-header a.navbar-brand')
@@ -73,14 +80,14 @@ function insertMsg(boardname) {
             .click(link)
             .expect(standupName.textContent).contains(boardname)
             .expect(addInteresting.exists).ok()
-            .expect(parentsAnnouncement.exists).notOk()
+            .expect(announcement.selector.exists).notOk(`A message by "${announcement.author}" already exists in ${boardname}, not inserting another.`)
 
             .click(addInteresting)
-            .expect(editHeader.textContent).contains("Interesting")
+            .expect(editHeader.textContent).contains("Help")
 
         await enterinfo()
         // back at page with one standup:
-        await t.expect(parentsAnnouncement.exists).ok()              
+        await t.expect(announcement.selector.exists).ok()              
     })
 
 }
@@ -97,16 +104,13 @@ async function enterinfo() {
         .expect(author.exists).ok()
         .expect(description.exists).ok()
     
-        .typeText(title, 'Parents at Pivotal survey')
-        .typeText(author, 'Parents@Pivotal')
-        .typeText(description, `Calling all Pivot Parents + Caregivers! 
-  Please fill out this brief survey to help the Parents Employee Resource Group understand where to focus its efforts upon launch in early 2019: 
-  <https://goo.gl/forms/rnQWpa4G6DPU7V4U2>
-`)
+        .typeText(title, announcement.title)
+        .typeText(author, announcement.author)
+        .typeText(description, announcement.description)
+        .debug()
 
         .expect(submitbutton.exists).ok()
         .click(submitbutton)
-
 }
 
 
