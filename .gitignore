@@ -28,7 +28,8 @@ coverage
 
 config/ips.yml
 
-# dirk
+# testcafe bulk upload
 *~
 node_modules/
 screenshots/
+testcafe/run*.log
