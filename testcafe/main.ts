@@ -1,140 +1,68 @@
 import { Selector,t } from 'testcafe'
 
 const boards = [
-'Sydney Developers',
-'Labs - Sydney',
-'Ann Arbor Labs',
-'APJ Pivotal Support Daily Standup',
-'App Transformation',
-'AppTx .NET Practice',
-'AppTx EMEA',
-'AppTx Federal',
-'AppTX Leadership',
-'apptx middle earth',
-'AppTx PL',
-'AppTx South',
-'AppTX West',
-'BCS Daily Standup',
-'Beaverton',
-'Boston',
-'Boulder',
-'Canada Field Teams',
-'Central EMEA',
-'CF - Denver',
-'CF - London Standup',
-'CF - San Francisco',
-'CF Garden',
-'Chicago Labs',
-'Cloud Planner',
-'Cloudops Beijing',
-'CloudOps EU Stand-Up',
-'CloudOps GAP',
-'CloudOps SF',
-'CloudOps-PWS Standup',
-'Cork',
-'Cork - DATA',
-'Cork - PaaS',
-'CSR Stand Up',
-'Data - Beijing',
-'Data Innovation Labs Standup',
-'Data Platform Engineering',
-'Denver Office',
-'Designers - DC',
-'Diversity Council',
-'Dublin',
-'East Coast PM Townhall',
-'ED Team Leads',
-'ED West',
-'EE-DATA',
-'EMEA Board',
-'EMEA Operations',
-'EMEA Product Team',
-'Engagement Director',
-'Escalation Management',
-'Finance - Pivotal Sales/PS',
-'FinOpS Analyst',
-'GP Toolsmiths',
-'Greenplum - Palo Alto',
-'Greenplum for Kubernetes',
-'HAWQ Support',
-'HCL Enablement',
-'IAD Test',
-'Infosec-Wolfe',
-'k8s-c10s',
-'Labs - Atlanta',
-'Labs - Austin',
-'Labs - Berlin',
-'Labs - Dallas',
-'Labs - Dearborn',
-'Labs - Dearborn',
-'Labs - Munich',
-'Labs - San Francisco',
-'Labs - Santa Monica',
-'Labs - Seattle',
-'Labs - Singapore',
-'Labs - Tokyo',
-'Labs - Toronto',
-'Labs - Washington, D.C.',
-'LATAM Sales',
-'London',
-'London CloudFoundry Services',
-'NE PA Team',
-'NY Office Standup',
-'PA Toolsmiths',
-'PA-Federal',
-'PA-PacWest',
-'PaaS Support Retro',
-'Pair Exchange Digest',
-'Palo Alto Office',
-'Paris',
-'PCF Autoscaler',
-'PCF Cassandra',
-'PCF RabbitMQ',
-'PCF Redis',
-'PCF Services Enablement',
-'PCF Solutions EMEA',
-'PCF+Photon',
-'PCFS',
-'PCFS (Beach)',
-'PCFS - Pivotal Support',
-'PCFS - Platform Operations',
-'PCFS Federal Bi-weekly',
-'PCFS Leadership',
-'PCFS Product Managers',
-'PCFS- ED-PA Updates',
-'PDE Services',
-'PDE-EMEA Office Standup',
-'Pivotal Bosch Team',
-'Pivotal Support APAC',
-'Pivotal Tracker',
-'Pivotal Web Services (Production)',
-'PKS - Palo Alto',
-'PKS support standup - AMER',
-'PKS Support Weekly',
-'Platform Reliability Engineering',
-'RabbitMQ',
-'RabbitMQ SME',
-'Raytheon BAT',
-'Seattle Anchors',
-'Starsec Stand Up',
-'StubHub BAT',
-'sup-gpdb-cat-storage standup',
-'Support Data AMER Standup',
-'Tracker on GCP',
-'Transformation Practice',
-'VMware-Collaboration',
-'WestCorp Account Team'
+    'App Transformation',
+    'AppTX Leadership',
+    'AppTX West',
+    'AppTx .NET Practice',
+    'AppTx Federal',
+    'AppTx PL',
+    'AppTx South',
+    'Beaverton',
+    'Boston',
+    'Boulder',
+    'CF - London Standup',
+    'CF - San Francisco',
+    'Chicago Labs',
+    'Cork - DATA',
+    'Cork - PaaS',
+    'Data - Beijing',
+    'Data Innovation Labs Standup',
+    'Denver Office',
+    'Dublin',
+    'ED Team Leads',
+    'ED West',
+    'Finance - Pivotal Sales/PS',
+    'Greenplum - Palo Alto',
+    'Greenplum for Kubernetes',
+    'Labs - Atlanta',
+    'Labs - Austin',
+    'Labs - Berlin',
+    'Labs - Dallas',
+    'Labs - San Francisco',
+    'Labs - Santa Monica',
+    'Labs - Seattle',
+    'Labs - Singapore',
+    'Labs - Sydney',
+    'Labs - Sydney',
+    'Labs - Tokyo',
+    'Labs - Washington, D.C.',
+    'London',
+    'NE PA Team',
+    'NY Office Standup',
+    'PA-Federal',
+    'PCF Solutions EMEA',
+    'PCFS Federal Bi-weekly',
+    'PCFS',
+    'PDE-EMEA Office Standup',
+    'PKS - Palo Alto',
+    'PKS Support Weekly',
+    'PKS support standup - AMER',
+    'Paris',
+    'Pivotal Tracker',
+    'RabbitMQ',
+    'Sydney Developers',
+    'apptx middle earth'
  ]
 
 
+ // # TODO make calendar event
 const announcement = {
     author: 'Parents@Pivotal',
-    title: 'Parents at Pivotal survey',
-    description: `Calling all Pivot Parents + Caregivers! 
-Please fill out this brief survey to help the Parents Employee Resource Group understand where to focus its efforts upon launch in early 2019: 
-<https://goo.gl/forms/rnQWpa4G6DPU7V4U2>
-`,
-    date: '2018-12-04',  // date in YYYY-MM-DD format
+    title: 'Parents@Pivotal ERG launch',
+    description: `Parents@Pivotal ERG  (Employee Resource Group) launches on April 9th!  We are holding three information sessions to tell people about what we do, spread around the day so one should be convenient for your timezone.
+To join one of the calls, or to join the ERG, visit https://forms.gle/qWUeHzDD5ZW9BQPd7, and don’t forget to sign up for one of our information sessions! Also, you can join #parents-at-pivotal for ERG updates and discussions about benefits and upcoming events.`,
+    date: '2019-04-09',  // date in YYYY-MM-DD format
     selector: Selector('bogus')
 }
 announcement.selector = Selector('div.author').withText(announcement.author)
@@ -151,14 +79,14 @@ function insertMsg(boardname) {
     test('Navigate', async t => {
 
         const link = Selector('a').withExactText(boardname)
-        const addInteresting =  Selector('i.icon-plus-sign').nth(1)
+        const addInteresting =  Selector('i.icon-plus-sign').nth(3)  // .nth(1)
 
         //.nth(2)
               //Selector('h2').withText("Interestings")
               //.nextSibling('a').nth(0).find('i.icon-plus-sign')
         const standupName = Selector('div.navbar-header a.navbar-brand')
         const editHeader = Selector('div.block-header h2')
-        
+
         await t
             .navigateTo(page)
             .expect(link.exists).ok(`Could not find board ${boardname}`)
@@ -168,11 +96,12 @@ function insertMsg(boardname) {
             .expect(announcement.selector.exists).notOk(`A message by "${announcement.author}" already exists in ${boardname}, not inserting another.`)
 
             .click(addInteresting)
-            .expect(editHeader.textContent).contains("Help")
+            // .expect(editHeader.textContent).contains("Help")
+            .expect(editHeader.textContent).contains("Event")
 
         await enterinfo()
         // back at page with one standup:
-        await t.expect(announcement.selector.exists).ok()              
+        await t.expect(announcement.selector.exists).ok()
     })
 
 }
@@ -190,13 +119,13 @@ async function enterinfo() {
         .expect(author.exists).ok()
         .expect(description.exists).ok()
         .expect(date.exists).ok()
-    
+
         .typeText(title, announcement.title)
         .typeText(author, announcement.author)
         .typeText(description, announcement.description)
         //.selectText(date, {timeout: 50})
         .typeText(date, announcement.date, {replace:true})
-    
+
         .expect(submitbutton.exists).ok()
         .click(submitbutton)
 }
