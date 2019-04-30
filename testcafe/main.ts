@@ -1,6 +1,6 @@
 import { Selector,t } from 'testcafe'
 
-const boards = [
+const all_boards = [
     'App Transformation',
     'AppTX Leadership',
     'AppTX West',
@@ -22,7 +22,6 @@ const boards = [
     'Dublin',
     'ED Team Leads',
     'ED West',
-    'Finance - Pivotal Sales/PS',
     'Greenplum - Palo Alto',
     'Greenplum for Kubernetes',
     'Labs - Atlanta',
@@ -50,27 +49,62 @@ const boards = [
     'PKS support standup - AMER',
     'Paris',
     'Pivotal Tracker',
-    'RabbitMQ',
     'Sydney Developers',
     'apptx middle earth'
  ]
 
 
+ const us_boards = [  // US boards only
+    'App Transformation',
+    'AppTX Leadership',
+    'AppTX West',
+    'AppTx .NET Practice',
+    'AppTx Federal',
+    'AppTx PL',
+    'AppTx South',
+    'Beaverton',
+    'Boston',
+    'Boulder',
+    'CF - San Francisco',
+    'Chicago Labs',
+    'Denver Office',
+    'ED Team Leads',
+    'ED West',
+    'Greenplum - Palo Alto',
+    'Greenplum for Kubernetes',
+    'Labs - Atlanta',
+    'Labs - Austin',
+    'Labs - Dallas',
+    'Labs - San Francisco',
+    'Labs - Santa Monica',
+    'Labs - Seattle',
+    'Labs - Washington, D.C.',
+    'NY Office Standup',
+    'PA-Federal',
+    'PCFS',
+    'PKS - Palo Alto',
+    'PKS support standup - AMER',
+    'Pivotal Tracker',
+]
+
+
+const boards = us_boards
+
+
  // # TODO make calendar event
 const announcement = {
     author: 'Parents@Pivotal',
-    title: 'Parents@Pivotal ERG launch',
-    description: `Parents@Pivotal ERG  (Employee Resource Group) launches on April 9th!  We are holding three information sessions to tell people about what we do, spread around the day so one should be convenient for your timezone.
-To join one of the calls, or to join the ERG, visit https://forms.gle/qWUeHzDD5ZW9BQPd7, and don’t forget to sign up for one of our information sessions! Also, you can join #parents-at-pivotal for ERG updates and discussions about benefits and upcoming events.`,
-    date: '2019-04-09',  // date in YYYY-MM-DD format
+    title: 'Sign up for benefits for parents session on May 7th',
+    description: `One of the goals of the Parents@ ERG is to increase awareness of Pivotal benefits that support parents + caregivers, and as mentioned at our launch last month we have partnered with the Benefits team to bring information sessions to you! We will run multiple sessions throughout the day on May 7! If you are interested, please sign up here: http://bit.ly/parents-benefits (feel free to share!)`,
+    date: '2019-05-01',  // date in YYYY-MM-DD format
     selector: Selector('bogus')
 }
 announcement.selector = Selector('div.author').withText(announcement.author)
 
 
 // PLEASE test this first on a local install of Whiteboard!!
-const page = 'http://localhost:8080/standups'
-// const page = 'https://whiteboard.pivotal.io/standups'
+// const page = 'http://localhost:8080/standups'
+const page = 'https://whiteboard.pivotal.io/standups'
 
 
 function insertMsg(boardname) {
@@ -79,11 +113,8 @@ function insertMsg(boardname) {
     test('Navigate', async t => {
 
         const link = Selector('a').withExactText(boardname)
-        const addInteresting =  Selector('i.icon-plus-sign').nth(3)  // .nth(1)
+        const addInteresting =  Selector('i.icon-plus-sign').nth(2)  // .nth(1)
 
-        //.nth(2)
-              //Selector('h2').withText("Interestings")
-              //.nextSibling('a').nth(0).find('i.icon-plus-sign')
         const standupName = Selector('div.navbar-header a.navbar-brand')
         const editHeader = Selector('div.block-header h2')
 
@@ -96,8 +127,9 @@ function insertMsg(boardname) {
             .expect(announcement.selector.exists).notOk(`A message by "${announcement.author}" already exists in ${boardname}, not inserting another.`)
 
             .click(addInteresting)
-            // .expect(editHeader.textContent).contains("Help")
-            .expect(editHeader.textContent).contains("Event")
+            // .expect(editHeader.textContent).contains("Help")  // 1
+            .expect(editHeader.textContent).contains("Interesting")  // 2
+            // .expect(editHeader.textContent).contains("Event")  // 3
 
         await enterinfo()
         // back at page with one standup:
